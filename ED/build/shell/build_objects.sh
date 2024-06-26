@@ -6,16 +6,7 @@ SOURCES=$( (cd ../../.. && find ED/src -name "*.[Ff]90" -and -not -path "ED/src/
 # Remove ED/src/driver/edmain.F90 from OBJECTS
 SOURCES=$(echo $SOURCES | sed 's/ED\/src\/driver\/edmain.F90//')
 
-OBJECTS=$(for obj in $SOURCES; do
-  echo "${obj%.[Ff]90}.o"
-done)
-
-
-echo "MAIN = ED/src/driver/edmain.F90" > objects.mk
-echo "MAINOBJ = edmain.o" >>objects.mk
-printf "\n\n" >>objects.mk
-
-echo OBJ_MODEL = $OBJECTS ED/src/utils/utils_c.o >>objects.mk
+echo SOURCES = $SOURCES ED/src/utils/utils_c.c > objects.mk
 
 rm -f dependency.mk
 
